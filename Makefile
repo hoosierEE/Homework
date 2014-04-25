@@ -1,9 +1,8 @@
 # from the command line:
 # g++ matrix.cpp -o hello
 
-all: hello
 
-hello:
+all:
 	g++ matrix.cpp -o hello
 
 clean:

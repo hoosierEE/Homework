@@ -1,36 +1,35 @@
 #include <iostream>
-#include <string>
-#include <sstream>
+#include <vector>
+#include <algorithm>
 
-std::string mystr = "";
-
-int row, col;
+using namespace std;
 
 int main() {
+  vector<vector<int> > m;
 
-  std::cout << "For your m by n matrix, "
-     "enter first the number of rows (m), then a space, "
-     "then the number of columns (n): " << std::endl;
+  vector<vector<int> > twodee(4, vector<int>(3,0));
 
-  std::cin >> row >> col;
-
-  std::cout << "I guess this is going to be an " << row << " by " << col << " matrix." << std::endl;
-  
-  std::cout << "Next, enter a vector by which your matrix will be multiplied: " << std::endl;
-
-  // std::cout << "Input a vector, delimited by spaces (e.g. 1 2 3): " << std::endl;
-
-  
-  getline (std::cin, mystr);
-  std::istringstream ss(mystr);
-
-//  std::cout << "you said: " << std::endl;
-
-  for(std::string word; ss >> word;) {
-    std::cout << word << std::endl;
+  for (int i = 0; i < 5; i++){
+    vector<int> row;
+    m.push_back(row);
   }
 
+  m[0].push_back(5);
+  cout << m[0][0] << endl;
 
+// Bjarne's code:
+//     double d;
+//     while(cin>>d) v.push_back(d); // read elements
+//     if (!cin.eof()) {   // check if input failed
+//       cerr << "format error\n";
+//       return 1; // error return
+//     }
+// 
+//     cout << "read " << v.size() << " elements\n";
+// 
+//     reverse(v.begin(),v.end());
+//     cout << "elements in reverse order:\n";
+//     for (int i = 0; i<v.size(); ++i) cout << v[i] << '\n';
 
-  return 0;
+    // return 0; // success return
 }
