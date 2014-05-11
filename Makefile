@@ -3,7 +3,7 @@
 
 
 all:
-	g++ matrix.cpp -o hello
+	g++ main.cpp -o hello
 
 clean:
 	rm -rf *o hello
