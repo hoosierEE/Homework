@@ -3,7 +3,7 @@
 
 
 all:
-	g++ main.cpp -o hello
+	g++ hello.cpp -o hello
 
 clean:
 	rm -rf *o hello

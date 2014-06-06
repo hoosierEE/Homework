@@ -2,7 +2,7 @@
 #include <iostream>
 
 using namespace std;
-
+// from http://www.blog.highub.com/c-plus-plus/c-parse-split-delimited-string/
 // usage:
 // split (string_to_modify, delimiting_char, string_to_store_results)
 void split(const string& s, char c, vector<string>& v) {
