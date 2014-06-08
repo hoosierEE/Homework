@@ -1,9 +1,12 @@
-# from the command line:
-# g++ matrix.cpp -o hello
+CC = g++
+FILES = *.cpp
+OUT_EXE = output_executable
+OPTS = -std=c++0x
 
-
-all:
-	g++ hello.cpp -o hello
+build: $(FILES)
+	$(CC) -o $(OUT_EXE) $(FILES) $(OPTS)
 
 clean:
-	rm -rf *o hello
+	-rm -f *.o core $(OUT_EXE)
+
+rebuild: clean build

@@ -3,9 +3,7 @@
 using namespace std;
 
 int main() {
-
   int startNumber = 100;
-
   while (startNumber--) {
     if (!(startNumber % 15))
       cout << startNumber << " fizzbuzz" << endl;
