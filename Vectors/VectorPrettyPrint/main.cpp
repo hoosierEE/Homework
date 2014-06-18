@@ -21,12 +21,12 @@ template <> std::ostream& operator<< (std::ostream& os, const std::vector<char>&
 int main() {
   // initialize some vectors
   // floats
-  static const float floatArray[] = { 1.1, 10, 82, 4, 5 };
+  static const float floatArray[] = { 1.1, 1.9, 8.2, 0.4, -1.5 };
   std::vector<float> floatVector
     ( floatArray , floatArray + sizeof(floatArray) / sizeof(floatArray[0]) );
 
   // integers
-  static const int integralArray[] = { 1, 10, 82, 4, 5 };
+  static const int integralArray[] = { 1, 10, 82, -4, 5 };
   std::vector<int> integralVector
     ( integralArray , integralArray + sizeof(integralArray) / sizeof(integralArray[0]) );
 
@@ -36,7 +36,8 @@ int main() {
     ( charArray , charArray+sizeof(charArray) / sizeof(charArray[0]) );
 
   // pretty-print the vector using the overloaded '<<' operator
-  std::cout << "a vector of floats: " << floatVector << std::endl;
+  std::cout << "a vector of floats: " << std::endl;
+  std::cout << floatVector << std::endl;
   std::cout << "a vector of chars (string): " << charVector << std::endl;
   std::cout << "a vector of integers: " << integralVector << std::endl;
 }
