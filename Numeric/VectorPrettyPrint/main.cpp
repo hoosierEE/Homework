@@ -23,23 +23,17 @@ int main() {
   // floats
   static const float floatArray[] = { 1.1, 10, 82, 4, 5 };
   std::vector<float> floatVector
-    ( floatArray
-    , floatArray + sizeof(floatArray) / sizeof(floatArray[0])
-    );
+    ( floatArray , floatArray + sizeof(floatArray) / sizeof(floatArray[0]) );
 
   // integers
   static const int integralArray[] = { 1, 10, 82, 4, 5 };
   std::vector<int> integralVector
-    ( integralArray
-    , integralArray + sizeof(integralArray) / sizeof(integralArray[0])
-    );
+    ( integralArray , integralArray + sizeof(integralArray) / sizeof(integralArray[0]) );
 
   // chars
   static const char charArray[] = { "hello" };
   std::vector<char> charVector
-    ( charArray
-    , charArray+sizeof(charArray) / sizeof(charArray[0])
-    );
+    ( charArray , charArray+sizeof(charArray) / sizeof(charArray[0]) );
 
   // pretty-print the vector using the overloaded '<<' operator
   std::cout << "a vector of floats: " << floatVector << std::endl;
