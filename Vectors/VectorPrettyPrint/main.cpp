@@ -49,6 +49,8 @@ int main() {
   std::vector<char> charVector = { 'h', 'e', 'l', 'l', 'o' };
   std::vector<std::string> stringVector = { "hello", "there", "world" };
 
+  int num = 0;
+
   // pretty-print the vector using the overloaded 'operator<<'
   std::cout << floatVector << std::endl;
   std::cout << charVector << std::endl;
