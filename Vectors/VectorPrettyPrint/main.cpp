@@ -1,4 +1,3 @@
-#define NEWLINE os<<"\n";
 #include <vector>
 #include <iostream>
 
@@ -10,7 +9,7 @@ template <typename T> std::ostream& operator<< (std::ostream& os, const std::vec
       os << i << ", ";
   os << "\b\b ";
 
-  NEWLINE
+  os<<"\n";
 
   // second attempt
   os << v.front();
@@ -19,13 +18,13 @@ template <typename T> std::ostream& operator<< (std::ostream& os, const std::vec
       os << ", " << i;
   }
 
-  NEWLINE
+  os<<"\n";
 
   // terse
   for (auto& i : v)
     i == *v.begin() ? os << i : os << ", " << i;
 
-  NEWLINE
+  os<<"\n";
 
   // more idiomatic C++
   auto it = v.begin();
@@ -33,7 +32,7 @@ template <typename T> std::ostream& operator<< (std::ostream& os, const std::vec
     os << *it++ << ", ";
   os << *it;
 
-  NEWLINE
+  os<<"\n";
 
   auto itr = v.begin();
   os << *itr++;
@@ -45,11 +44,10 @@ template <typename T> std::ostream& operator<< (std::ostream& os, const std::vec
 
 int main() {
   // initialize some vectors
-  std::vector<float> floatVector = { 1.1, 1.9, 8.2, 0.4, -1.5 };
+  std::vector<float> floatVector = { 1.1, 1.9, 8.2, 0.4, -1.5, };
   std::vector<int> integralVector = { 1, 10, 82, -4, 5 };
   std::vector<char> charVector = { 'h', 'e', 'l', 'l', 'o' };
   std::vector<std::string> stringVector = { "hello", "there", "world" };
-  //auto vv = { 1, 2, 3, 4};
 
   // pretty-print the vector using the overloaded 'operator<<'
   std::cout << floatVector << std::endl;
