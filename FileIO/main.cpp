@@ -18,6 +18,7 @@
 #include <iomanip>
 #include <string>
 #include <vector>
+#include <typeinfo>
 /*}}}*/
 
 std::vector<std::string> csvList(std::string fileName) {
@@ -26,7 +27,7 @@ std::vector<std::string> csvList(std::string fileName) {
   std::string line;
   // open the file and read the lines into a vector of strings
   f.open(fileName, std::ios::in);
-  while(!getline(f, line).eof()){
+  while(!getline(f, line).eof()) {
     result.push_back(line);
   }
   f.close();
@@ -41,30 +42,16 @@ int main() {
   result.open("processed/test1processed.txt", std::ios::out);
 
   for(auto& csvFile : csvList("csvNames")){
-    for(auto& row : csvFile) {
-      std::ifstream raw (csvFile, std::ios::in);
-      std::string line;
-      while(!getline(raw, line).eof()) {
-        std::cout << line << std::endl;
-      }
-      raw.close();
+    // std::cout << csvFile << std::endl; // prints 'test1.csv' etc.
+    std::string line;
+    std::ifstream f;
+    f.open(csvFile, std::ios::in);
+    while(!getline(f, line).eof()) {
+      std::cout << line << std::endl;
     }
+    f.close();
   }
 
-//  for(auto& filename : csvList("csvNames")){
-//    std::ifstream raw;
-//    raw.open(filename, std::ios::in);
-//    std::cout << filename << std::endl;
-//
-//    std::string line;
-//    while(!getline(raw,line).eof()){
-//      std::cout << line << std::endl;
-//    }
-//    raw.close();
-//    std::cout << std::endl;
-//    std::cout << std::endl;
-//  }
-//
   // close the output stream
   result.close();
 }
