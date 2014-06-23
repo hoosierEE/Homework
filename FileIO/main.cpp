@@ -53,8 +53,11 @@ int main() {
     std::ifstream f;
     f.open(csvFile, std::ios::in);
     while(!getline(f, row).eof()) {
-      // write the current line to the output file
+      // write the whole line to the output file
       result << row << std::endl;
+      // TODO:
+      // write only one column...
+      // [code goes here]
     }
     f.close();
   }
