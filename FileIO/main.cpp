@@ -21,7 +21,13 @@
 #include <typeinfo>
 /*}}}*/
 
-std::vector<std::string> csvList(std::string fileName) {
+// constants
+const std::string inputNameList = "csvNames";
+const std::string outputName = "processed/test1processed.txt";
+
+// functions
+std::vector<std::string> csvFileVector(std::string fileName) {
+  // get the names of the CSV files from a pre-generated text file
   std::vector<std::string> result;
   std::ifstream f;
   std::string line;
@@ -36,22 +42,22 @@ std::vector<std::string> csvList(std::string fileName) {
 
 
 int main() {
-
   // open a stream for writing
   std::ofstream result;
-  result.open("processed/test1processed.txt", std::ios::out);
+  result.open(outputName, std::ios::out);
 
-  for(auto& csvFile : csvList("csvNames")){
-    // std::cout << csvFile << std::endl; // prints 'test1.csv' etc.
-    std::string line;
+  // read the streams
+  for(auto& csvFile : csvFileVector(inputNameList)){
+    // std::cout << csvFile << std::endl; // prints 'test1.csv test2.csv' etc.
+    std::string row;
     std::ifstream f;
     f.open(csvFile, std::ios::in);
-    while(!getline(f, line).eof()) {
-      std::cout << line << std::endl;
+    while(!getline(f, row).eof()) {
+      // write the current line to the output file
+      result << row << std::endl;
     }
     f.close();
   }
-
   // close the output stream
   result.close();
 }
