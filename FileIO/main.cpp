@@ -9,26 +9,62 @@
 //     file1
 //     file2
 //     ...
-//     filen/*}}}*/
+//     filen
+//
 
+// includes
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <string>
 #include <vector>
+/*}}}*/
 
-int main(){
-  std::ifstream raw;
-  std::ofstream results;
-  raw.open("raw/test1.csv", std::ios::in);
-  results.open("processed/test1processed.txt", std::ios::out);
-
+std::vector<std::string> csvList(std::string fileName) {
+  std::vector<std::string> result;
+  std::ifstream f;
   std::string line;
+  // open the file and read the lines into a vector of strings
+  f.open(fileName, std::ios::in);
+  while(!getline(f, line).eof()){
+    result.push_back(line);
+  }
+  f.close();
+  return result;
+}
 
-  while(!getline(raw,line).eof()){
-    std::cout << line << std::endl;
+
+int main() {
+
+  // open a stream for writing
+  std::ofstream result;
+  result.open("processed/test1processed.txt", std::ios::out);
+
+  for(auto& csvFile : csvList("csvNames")){
+    for(auto& row : csvFile) {
+      std::ifstream raw (csvFile, std::ios::in);
+      std::string line;
+      while(!getline(raw, line).eof()) {
+        std::cout << line << std::endl;
+      }
+      raw.close();
+    }
   }
 
-  raw.close();
-  results.close();
+//  for(auto& filename : csvList("csvNames")){
+//    std::ifstream raw;
+//    raw.open(filename, std::ios::in);
+//    std::cout << filename << std::endl;
+//
+//    std::string line;
+//    while(!getline(raw,line).eof()){
+//      std::cout << line << std::endl;
+//    }
+//    raw.close();
+//    std::cout << std::endl;
+//    std::cout << std::endl;
+//  }
+//
+  // close the output stream
+  result.close();
 }
