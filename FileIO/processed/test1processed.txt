@@ -1,8 +1,9 @@
-trailingComma1a,trailingComma1b,trailingComma1c,trailingComma1d,trailingComma1e,
-trailingComma2a,trailingComma2b,trailingComma2c,trailingComma2d,trailingComma2e,
-trailingComma3a,trailingComma3b,trailingComma3c,trailingComma3d,trailingComma3e,
-trailingComma4a,trailingComma4b,trailingComma4c,trailingComma4d,trailingComma4e,
-newline1a,newline1b,newline1c,newline1d,newline1e
-newline2a,newline2b,newline2c,newline2d,newline2e
-newline3a,newline3b,newline3c,newline3d,newline3e
-newline4a,newline4b,newline4c,newline4d,newline4e
+lines
+trailingComma1e
+trailingComma2e
+trailingComma3e
+trailingComma4e
+newline1e
+newline2e
+newline3e
+newline4e

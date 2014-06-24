@@ -1,7 +1,7 @@
-// a c++ file to process the results of a data logging run of my oscilloscope./*{{{*/
+// a c++ file to process the results of a data logging run of my oscilloscope.
 // the scope saves its run as a bunch of csv files, to use this program, put the
 // scope files in a directory "raw" and position this program so it can access raw/[files].
-// that is, the to-level structure should look like this:
+// that is, the top-level structure should look like this:
 //
 // some-dir/
 //   this_program
@@ -9,18 +9,12 @@
 //     file1
 //     file2
 //     ...
-//     filen
-//
+//     fileN
 
 // includes
-#include <iostream>
 #include <fstream>
-#include <iomanip>
-#include <string>
 #include <vector>
-#include <typeinfo>
 #include <sstream>
-/*}}}*/
 
 // constants
 const std::string inputNameList = "csvNames";
@@ -41,7 +35,7 @@ std::vector<std::string> csvFileVector(std::string fileName) {
   return result;
 }
 
-std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
+std::vector<std::string> split(const std::string &s, char delim, std::vector<std::string> &elems) {
     std::stringstream ss(s);
     std::string item;
     while (std::getline(ss, item, delim)) {
@@ -50,14 +44,10 @@ std::vector<std::string> &split(const std::string &s, char delim, std::vector<st
     return elems;
 }
 
-std::vector<std::string> split(const std::string &s, char delim) {
-    std::vector<std::string> elems;
-    split(s, delim, elems);
-    return elems;
-}
-
+// program
 int main() {
   // open a stream for writing
+  int n = 0;
   std::ofstream result;
   result.open(outputName, std::ios::out);
 
@@ -67,15 +57,13 @@ int main() {
     std::string row;
     std::ifstream f;
     f.open(csvFile, std::ios::in);
-    while(!getline(f, row).eof()) {
-      // write the whole line to the output file
-      result << row << std::endl;
 
+    while(!std::getline(f, row).eof()) {
+      std::vector<std::string> elms;
       // split the row
-
-      // TODO:
-      // write only one column...
-      // [code goes here]
+      split(row, ',', elms);
+      // concat the nth column to the output file
+      result << elms[elms.size() - (1 + n)] << std::endl;
     }
     f.close();
   }
