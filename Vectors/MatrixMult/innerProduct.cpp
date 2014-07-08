@@ -9,13 +9,6 @@ template <typename T> std::ostream& operator<< (std::ostream& os, const std::vec
 }
 
 int main(int argc, char* argv[]) {
-
-  // // fail early, fail often
-  // if (argc <= 4) {
-  //   std::cerr << "must call with at least 4 space-separated integers" << std::endl;
-  //   return 1;
-  // }
-
   // hard-coded vector
   std::vector<int> vec = { 0, 1, 2, 3 };
 

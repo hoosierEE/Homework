@@ -1,11 +1,10 @@
-# Matrix Multiplication
+# Polyglot Inner Product
 
-## Hard-Coded vector and matrix
+### C++
+1. have C++ compiler
+2. compile source code: `g++ innerProduct.cpp -std=c++11`
+3. run binary: `./a.out`
 
-* First in C++ (with C++11 extensions)
-* Next in J (version 801)
-
-J is much shorter, but cheats a little due to the fact that the J primitive `i.N` returns `0 1 2 ... N`
-which just happens to be the exact values chosen for the C++ program.
-
-Someday revisit to see how the two compare for arbitrary inputs.
+### J
+1. have J interpreter
+2. run program with interpreter: `jconsole < innerProduct.ijs`
