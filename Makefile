@@ -1,6 +1,6 @@
 CC = g++
 FILES = *.cpp
-OUT_EXE = output_executable
+OUT_EXE = a.out
 OPTS = -std=c++11
 
 build: $(FILES)
