@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <ctime>
 
 template <typename T> std::ostream& operator<< (std::ostream& os, const std::vector<T>& v)
 { // pretty-print a vector using operator<<
@@ -8,25 +10,27 @@ template <typename T> std::ostream& operator<< (std::ostream& os, const std::vec
   return os;
 }
 
-int main(int argc, char* argv[]) {
-  // hard-coded vector
-  std::vector<int> vec = { 0, 1, 2, 3 };
+int elems = 100;
 
-  // hard-coded matrix (2 dimensional array)
-  std::vector<std::vector<int>> mx =
-  { { 0, 1, 2, 3 }
-  , { 1, 2, 3, 4 }
-  , { 2, 3, 4, 5 }
-  , { 3, 4, 5, 6 }
-  };
+struct gen_rand {
+  gen_rand() {};
+  double operator()() { return rand()/(double)RAND_MAX;  }
+};
 
-  // accumulate column values
-  std::vector<int> acc = { 0, 0, 0, 0 };
+std::vector<double> randVec(std::vector<double> x) {
+  x.reserve(elems);
+  std::generate_n(std::back_inserter(x), elems, gen_rand());
+  return x;
+}
 
-  // multiply vec times columns of mx, store results in acc
-  for (int i = 0; i < vec.size(); i++)        // column
-    for (int j = 0; j < vec.size(); j++)      // row
-      acc[i] += vec[j] * mx[i][j];            // multiply-accumulate
+int main() {
+  srand(std::time(0));
+  std::vector<double> a;
+  std::vector<double> b;
+  //std::cout << randVec(x) << std::endl;
+  //std::cout << randVec(y) << std::endl;
 
-  std::cout << acc << std::endl;
+  // TODO: create matrix whose rows are a * (all of) b
+  std::vector<std::vector<double>> m;
+
 }
