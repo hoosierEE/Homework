@@ -1,23 +1,21 @@
+# makefile for some c++ files in a directory
+
 CC = g++
-#FILES = *.cpp
-#OUT_EXE = a.out
 OPTS = -std=c++11
-#
-#build: $(FILES)
-#	$(CC) -o $(OUT_EXE) $(FILES) $(OPTS)
-#
-#clean:
-#	-rm -f *.o core $(OUT_EXE)
-#
-#rebuild: clean build
+OUT_DIR = exe/
+SRC_DIR = src/
+CTEST = cnothing
+CMAIN = cInnerProduct.cpp
+COUTPUT = cexe
 
-all: nothing main
+all: clean nothing main
 
-nothing: nothing.cpp
-	$(CC) -o nothing nothing.cpp $(OPTS)
+nothing: $(SRC_DIR)$(CTEST).cpp
+	$(CC) -o $(OUT_DIR)$(CTEST) $(SRC_DIR)$(CTEST).cpp $(OPTS)
 
-main: innerProduct.cpp
-	$(CC) -o innerProduct innerProduct.cpp $(OPTS)
+main: $(SRC_DIR)$(CMAIN)
+	$(CC) -o $(OUT_DIR)$(COUTPUT) $(SRC_DIR)$(CMAIN) $(OPTS)
 
 clean:
-	-rm -f *.o core nothing innerProduct
+	-rm -f *.o core $(OUT_DIR)$(COUTPUT) $(OUT_DIR)$(CTEST)
+

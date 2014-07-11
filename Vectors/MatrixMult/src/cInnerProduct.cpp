@@ -30,10 +30,19 @@ int main() {
   a = randVec(a);
   b = randVec(b);
 
-  std::vector<double> m(elems * elems);
+  std::vector<double> r(elems, 0); // to store the result
+
+  // create a matrix of random values
+  std::vector<double> m(elems * elems); // actually this is a vector of length (N*N)
   for (auto i = 0; i < m.size(); i++)
     for (auto j = 0; j < a.size(); j++)
       m[i] = a[i] * b[j];
 
-  std::cout << m << std::endl;
+  // do inner product
+  for (auto i = 0; i < a.size(); i++)
+    for (auto j = 0; j < b.size(); j++)
+      r[i] += a[j] * m[i + j];
+
+
+  std::cout << r << std::endl;
 }
