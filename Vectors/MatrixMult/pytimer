@@ -4,15 +4,15 @@ import sys, time, os, subprocess
 matrixSize = sys.argv[1] # pass in an integer
 
 silent = " 2>&1 > /dev/null" # redirect standard output to trash
-jtest  = "exe/jnothing"
-ctest  = "exe/cnothing"
-jreal  = "exe/jexe"
-creal  = "exe/cexe"
+jtest  = "./exe/jnothing"
+ctest  = "./exe/cnothing"
+jreal  = "./exe/jexe"
+creal  = "./exe/cexe"
 
 def timer(filename):
     """ Measure the time it takes to invoke the given command
     using a shell subprocess. """
-    strCmd = "./" + filename + silent
+    strCmd = filename + silent
     start = end = 0
     start = time.time()
     myProcess = subprocess.Popen(strCmd, shell=True)
@@ -20,26 +20,34 @@ def timer(filename):
     myProcess.wait()
     return end - start
 
-def avg(filename):
-    """ how long it takes for python to simply call an external program """
-    iters = 10 
+def av(filename, test, iters = 10):
     avg = 0
     for i in range(iters):
-        avg += timer(filename)
-    result = avg / iters
-    return result
+        if (test):
+            avg += timer(filename)
+        else:
+            avg += timer(filename + " " + matrixSize)
+    return avg / iters
 
-#def winner(a1, n1, a2, n2):
-#    output = "Results:\n"
-#    if (a1 > a2):
-#        output = n1 + ", was " + (a1 / a2) + " times faster than " + n2
-#    elif (a1 < a2):
-#        output = n2 + ", was " + (a2 / a1) + " times faster than " + n1
-#    else:
-#        output = "tie"
-#    return output
+def winner(a1, n1, a2, n2):
+    output = "Results:\n"
+    output += n1 + ": " + str(a1) + "\n"
+    output += n2 + ": " + str(a2) + "\n"
+    if (a1 == a2):
+        output += "tie"
+    if (a1 < a2):
+        output += n1 + " was " + str(a2 / a1) + " times faster."
+    if (a1 > a2):
+        output += n2 + " was " + str(a1 / a2) + " times faster."
+    return output
 
-print avg(creal) # segfaulting...
-#print avg(jreal)
-#print winner(avg(creal), "C++", avg(jreal), "J")
+# use these two to subtract the estimated time required just run the executable or script
+#see = av(creal, False) - av(ctest, True)
+#jay = av(jreal, False) - av(jtest, True)
+
+# use these instead to get the actual time only
+see = av(creal, False, 1)
+jay = av(jreal, False, 1)
+
+print winner(see, "C++", jay, "J")
 

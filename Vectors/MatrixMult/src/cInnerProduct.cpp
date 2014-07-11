@@ -3,19 +3,23 @@
 #include <algorithm>
 #include <ctime>
 
-template <typename T> std::ostream& operator<< (std::ostream& os, const std::vector<T>& v)
+template <typename T>
+std::ostream& operator<< (std::ostream& os, const std::vector<T>& v)
 { // pretty-print a vector using operator<<
   for (auto& i : v)
     i == *v.begin() ? os << i : os << " " << i;
   return os;
 }
 
-struct randomGenerator {
+
+struct randomGenerator
+{ // until I did this, it would always output the same random sequence
   randomGenerator() {};
   double operator()() { return rand()/(double)RAND_MAX;  }
 };
 
-std::vector<double> randVec(std::vector<double> x, int elems) {
+std::vector<double> randVec(std::vector<double> &x, int elems)
+{ // return a random vector
   x.reserve(elems);
   std::generate_n(std::back_inserter(x), elems, randomGenerator());
   return x;
@@ -24,7 +28,6 @@ std::vector<double> randVec(std::vector<double> x, int elems) {
 int main(int argc, char* argv[]) {
   srand(std::time(0));
   int elems = std::atoi(argv[1]);
-  // create a matrix of random values
   std::vector<double> m(elems * elems); // actually this is a vector of length (N*N)
   std::vector<double> a;
   std::vector<double> b;
@@ -32,14 +35,16 @@ int main(int argc, char* argv[]) {
   b = randVec(b, elems);
   std::vector<double> r(elems, 0); // to store the result
 
+  // build random matrix
   for (auto i = 0; i < m.size(); i++)
     for (auto j = 0; j < a.size(); j++)
-      m[i] = a[j] * b[i];
+      m[i] = a[i] * b[j];
 
   // do inner product
   for (auto i = 0; i < a.size(); i++)
     for (auto j = 0; j < b.size(); j++)
       r[i] += a[i] * m[i + j];  // swap loop order
 
-  //std::cout << r << std::endl;
+  // print results
+  std::cout << r << std::endl;
 }
