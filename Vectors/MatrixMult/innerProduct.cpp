@@ -6,7 +6,7 @@
 template <typename T> std::ostream& operator<< (std::ostream& os, const std::vector<T>& v)
 { // pretty-print a vector using operator<<
   for (auto& i : v)
-    i == *v.begin() ? os << i : os << ", " << i;
+    i == *v.begin() ? os << i : os << " " << i;
   return os;
 }
 
@@ -31,8 +31,8 @@ int main() {
   b = randVec(b);
 
   std::vector<double> m(elems * elems);
-  for (int i = 0; i < m.size(); i++)
-    for (int j = 0; j < a.size(); j++)
+  for (auto i = 0; i < m.size(); i++)
+    for (auto j = 0; j < a.size(); j++)
       m[i] = a[i] * b[j];
 
   std::cout << m << std::endl;

@@ -3,8 +3,14 @@ import time, os, subprocess
 silent = " 2>&1 > /dev/null" # redirect standard output to trash
 jtest = "nothing.ijs"
 jtestcmd = "jc < " + jtest + silent
-ctest = "a.out"
+ctest = "nothing"
 ctestcmd = "./" + ctest + silent
+
+jreal = "innerProduct.ijs"
+creal = "innerProduct"
+
+jrealcmd = "jc < " + jreal + silent
+crealcmd = "./" + creal + silent
 
 def timer(cmd):
     """ Measure the time it takes to invoke the given command
@@ -25,5 +31,21 @@ def overhead(cmd, fname):
     else:
         return "missing file"
         
-print "J interpreter overhead: ", overhead(jtestcmd, jtest)
-print "C++ binary file overhead: ", overhead(ctestcmd, ctest)
+# calculate overhead
+jOH = overhead(jtestcmd, jtest)
+cOH = overhead(ctestcmd, ctest)
+
+# calculate time to run "real" programs 
+jtime = timer(jrealcmd)
+ctime = timer(crealcmd)
+
+
+print "J system time: ", jtime
+print "C++ system time: ", ctime
+
+#print ""
+#print "J interpreter overhead: ", jOH
+#print "C++ binary file overhead: ", cOH
+#print "J realistic time: ", jtime - jOH
+#print "C++ realistic time: ", ctime - cOH
+#

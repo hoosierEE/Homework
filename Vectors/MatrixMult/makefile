@@ -11,6 +11,8 @@ OPTS = -std=c++11
 #
 #rebuild: clean build
 
+all: nothing main
+
 nothing: nothing.cpp
 	$(CC) -o nothing nothing.cpp $(OPTS)
 
