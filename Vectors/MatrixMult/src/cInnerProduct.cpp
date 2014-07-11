@@ -24,7 +24,7 @@ std::vector<double> randVec(std::vector<double> &x, int elems)
 }
 
 int main(int argc, char* argv[])
-{ 
+{
   srand(std::time(0));
   int elems = std::atoi(argv[1]);
   std::vector<double> m(elems * elems); // actually this is a vector of length (N*N)
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
   // do inner product
   for (auto i = 0; i < a.size(); i++)
     for (auto j = 0; j < b.size(); j++)
-      r[i] += a[i] * m[i + j];  // swap loop order
+      r[i] += a[i] * m[i + j];  // swap loop order?
 
   // print results
   std::cout << r << std::endl;
