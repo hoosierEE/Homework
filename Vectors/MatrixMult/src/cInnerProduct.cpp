@@ -10,25 +10,26 @@ template <typename T> std::ostream& operator<< (std::ostream& os, const std::vec
   return os;
 }
 
-int elems = 100;
-
 struct randomGenerator {
   randomGenerator() {};
   double operator()() { return rand()/(double)RAND_MAX;  }
 };
 
-std::vector<double> randVec(std::vector<double> x) {
+std::vector<double> randVec(std::vector<double> x, int elems) {
   x.reserve(elems);
   std::generate_n(std::back_inserter(x), elems, randomGenerator());
   return x;
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+
+  int elems = std::atoi(argv[1]);
+
   srand(std::time(0));
   std::vector<double> a;
   std::vector<double> b;
-  a = randVec(a);
-  b = randVec(b);
+  a = randVec(a, elems);
+  b = randVec(b, elems);
 
   std::vector<double> r(elems, 0); // to store the result
 

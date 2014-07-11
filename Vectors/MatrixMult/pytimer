@@ -1,19 +1,23 @@
 #!/usr/bin/python
-import time, os, subprocess
+import sys, time, os, subprocess
+
+matrixSize = sys.argv[1] # pass in an integer
 
 silent = " 2>&1 > /dev/null" # redirect standard output to trash
-jtest = "exe/jnothing"
-ctest = "exe/cnothing"
-jreal = "./exe/jexe"
-creal = "./exe/cexe"
+jtest  = "exe/jnothing"
+ctest  = "exe/cnothing"
+jreal  = "./exe/jexe " + matrixSize
+creal  = "./exe/cexe " + matrixSize
+
 
 def timer(cmd):
     """ Measure the time it takes to invoke the given command
     using a shell subprocess. """
     cmd += silent
     start = time.time()
-    subprocess.Popen(cmd, shell=True)
+    myProcess = subprocess.Popen(cmd, shell=True)
     end = time.time()
+    myProcess.wait()
     return end - start
 
 def overhead(fname):#{{{
@@ -28,20 +32,17 @@ def overhead(fname):#{{{
     else:
         return "missing file"#}}}
 
-# calculate overhead#{{{
-jOH = overhead(jtest)
-cOH = overhead(ctest)#}}}
+# do test a few times, take average
+iters = 10
+javg = 0
+cavg = 0
+for i in range(iters):
+    jt = timer(jreal)
+    ct = timer(creal)
+    javg += jt
+    cavg += ct
 
-# calculate time to run "real" programs 
-jtime = timer(jreal)
-ctime = timer(creal)
-
-print "J system time: ", jtime
-print "C++ system time: ", ctime
-
-#print ""
-#print "J interpreter overhead: ", jOH
-#print "C++ binary file overhead: ", cOH
-#print "J realistic time: ", jtime - jOH
-#print "C++ realistic time: ", ctime - cOH
-#
+#print "C++ average, minus overhead: ", (cavg - overhead(ctest)) / iters
+#print "J average, minus overhead: ", (javg - overhead(jtest)) / iters
+print "C++ avg: ", cavg / iters
+print "J avg: ", javg / iters

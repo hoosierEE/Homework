@@ -1,4 +1,5 @@
 #!/usr/bin/jc
+NB. a j script for matrix multiplication of a random vector * random matrix
 
 n =. ".>{.|.ARGV  NB. dimension of our vector (and square matrix)
 NB. ARGV          list of input arguments
