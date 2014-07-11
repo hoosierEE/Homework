@@ -6,43 +6,40 @@ matrixSize = sys.argv[1] # pass in an integer
 silent = " 2>&1 > /dev/null" # redirect standard output to trash
 jtest  = "exe/jnothing"
 ctest  = "exe/cnothing"
-jreal  = "./exe/jexe " + matrixSize
-creal  = "./exe/cexe " + matrixSize
+jreal  = "exe/jexe"
+creal  = "exe/cexe"
 
-
-def timer(cmd):
+def timer(filename):
     """ Measure the time it takes to invoke the given command
     using a shell subprocess. """
-    cmd += silent
+    strCmd = "./" + filename + silent
+    start = end = 0
     start = time.time()
-    myProcess = subprocess.Popen(cmd, shell=True)
+    myProcess = subprocess.Popen(strCmd, shell=True)
     end = time.time()
     myProcess.wait()
     return end - start
 
-def overhead(fname):#{{{
+def avg(filename):
     """ how long it takes for python to simply call an external program """
-    if os.path.isfile(fname):
-        cmd = "./" + fname # execute the command using bash syntax ./filename
-        iters = 100
-        avg = 0
-        for i in range(iters):
-            avg += timer(cmd)
-        return avg / iters 
-    else:
-        return "missing file"#}}}
+    iters = 10 
+    avg = 0
+    for i in range(iters):
+        avg += timer(filename)
+    result = avg / iters
+    return result
 
-# do test a few times, take average
-iters = 10
-javg = 0
-cavg = 0
-for i in range(iters):
-    jt = timer(jreal)
-    ct = timer(creal)
-    javg += jt
-    cavg += ct
+#def winner(a1, n1, a2, n2):
+#    output = "Results:\n"
+#    if (a1 > a2):
+#        output = n1 + ", was " + (a1 / a2) + " times faster than " + n2
+#    elif (a1 < a2):
+#        output = n2 + ", was " + (a2 / a1) + " times faster than " + n1
+#    else:
+#        output = "tie"
+#    return output
 
-#print "C++ average, minus overhead: ", (cavg - overhead(ctest)) / iters
-#print "J average, minus overhead: ", (javg - overhead(jtest)) / iters
-print "C++ avg: ", cavg / iters
-print "J avg: ", javg / iters
+print avg(creal) # segfaulting...
+#print avg(jreal)
+#print winner(avg(creal), "C++", avg(jreal), "J")
+

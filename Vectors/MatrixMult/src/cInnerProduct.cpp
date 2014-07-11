@@ -22,28 +22,24 @@ std::vector<double> randVec(std::vector<double> x, int elems) {
 }
 
 int main(int argc, char* argv[]) {
-
-  int elems = std::atoi(argv[1]);
-
   srand(std::time(0));
+  int elems = std::atoi(argv[1]);
+  // create a matrix of random values
+  std::vector<double> m(elems * elems); // actually this is a vector of length (N*N)
   std::vector<double> a;
   std::vector<double> b;
   a = randVec(a, elems);
   b = randVec(b, elems);
-
   std::vector<double> r(elems, 0); // to store the result
 
-  // create a matrix of random values
-  std::vector<double> m(elems * elems); // actually this is a vector of length (N*N)
   for (auto i = 0; i < m.size(); i++)
     for (auto j = 0; j < a.size(); j++)
-      m[i] = a[i] * b[j];
+      m[i] = a[j] * b[i];
 
   // do inner product
   for (auto i = 0; i < a.size(); i++)
     for (auto j = 0; j < b.size(); j++)
-      r[i] += a[j] * m[i + j];
+      r[i] += a[i] * m[i + j];  // swap loop order
 
-
-  std::cout << r << std::endl;
+  //std::cout << r << std::endl;
 }
