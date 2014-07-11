@@ -3,11 +3,8 @@
 #include <algorithm>
 #include <ctime>
 
-//template <typename T>
-//std::ostream& operator<< (std::ostream& os, const std::vector<T>& v)
-// seems to run slightly faster without the template, not sure though.
 std::ostream& operator<< (std::ostream& os, const std::vector<double>& v)
-{ // pretty-print a vector using operator<<
+{ // pretty-print a vector of doubles using operator<<
   for (auto& i : v)
     i == *v.begin() ? os << i : os << " " << i;
   return os;
@@ -27,8 +24,7 @@ std::vector<double> randVec(std::vector<double> &x, int elems)
 }
 
 int main(int argc, char* argv[])
-{
-
+{ 
   srand(std::time(0));
   int elems = std::atoi(argv[1]);
   std::vector<double> m(elems * elems); // actually this is a vector of length (N*N)

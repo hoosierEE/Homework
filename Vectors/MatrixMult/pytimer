@@ -16,8 +16,8 @@ def timer(filename):
     start = end = 0
     start = time.time()
     myProcess = subprocess.Popen(strCmd, shell=True)
-    end = time.time()
     myProcess.wait()
+    end = time.time()
     return end - start
 
 def av(filename, test, iters = 10):
@@ -46,8 +46,11 @@ def winner(a1, n1, a2, n2):
 #jay = av(jreal, False) - av(jtest, True)
 
 # use these instead to get the actual time only
-see = av(creal, False, 1)
-jay = av(jreal, False, 1)
+# see = av(creal, False, 10)
+# jay = av(jreal, False, 10)
 
+# or just the results of a single run, no averaging
+see = timer(creal + " " + matrixSize)
+jay = timer(jreal + " " + matrixSize)
 print winner(see, "C++", jay, "J")
 
