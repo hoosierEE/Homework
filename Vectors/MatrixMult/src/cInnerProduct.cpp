@@ -11,7 +11,6 @@ std::ostream& operator<< (std::ostream& os, const std::vector<T>& v)
   return os;
 }
 
-
 struct randomGenerator
 { // until I did this, it would always output the same random sequence
   randomGenerator() {};
@@ -25,17 +24,21 @@ std::vector<double> randVec(std::vector<double> &x, int elems)
   return x;
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
+
   srand(std::time(0));
   int elems = std::atoi(argv[1]);
   std::vector<double> m(elems * elems); // actually this is a vector of length (N*N)
   std::vector<double> a;
   std::vector<double> b;
-  a = randVec(a, elems);
-  b = randVec(b, elems);
   std::vector<double> r(elems, 0); // to store the result
 
-  // build random matrix
+  // put random values in a and b
+  a = randVec(a, elems);
+  b = randVec(b, elems);
+
+  // build random matrix from the two random vectors
   for (auto i = 0; i < m.size(); i++)
     for (auto j = 0; j < a.size(); j++)
       m[i] = a[i] * b[j];
