@@ -12,14 +12,14 @@ template <typename T> std::ostream& operator<< (std::ostream& os, const std::vec
 
 int elems = 100;
 
-struct gen_rand {
-  gen_rand() {};
+struct randomGenerator {
+  randomGenerator() {};
   double operator()() { return rand()/(double)RAND_MAX;  }
 };
 
 std::vector<double> randVec(std::vector<double> x) {
   x.reserve(elems);
-  std::generate_n(std::back_inserter(x), elems, gen_rand());
+  std::generate_n(std::back_inserter(x), elems, randomGenerator());
   return x;
 }
 
@@ -27,10 +27,13 @@ int main() {
   srand(std::time(0));
   std::vector<double> a;
   std::vector<double> b;
-  //std::cout << randVec(x) << std::endl;
-  //std::cout << randVec(y) << std::endl;
+  a = randVec(a);
+  b = randVec(b);
 
-  // TODO: create matrix whose rows are a * (all of) b
-  std::vector<std::vector<double>> m;
+  std::vector<double> m(elems * elems);
+  for (int i = 0; i < m.size(); i++)
+    for (int j = 0; j < a.size(); j++)
+      m[i] = a[i] * b[j];
 
+  std::cout << m << std::endl;
 }

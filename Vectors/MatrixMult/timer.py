@@ -15,8 +15,7 @@ def timer(cmd):
     return end - start
 
 def overhead(cmd, fname):
-    """ Subtract this amount to get a more realistic idea
-    of the real time used by the given program. """
+    """ how long it takes for python to simply call an external program """
     if os.path.isfile(fname):
         iters = 100
         avg = 0

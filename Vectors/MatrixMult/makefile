@@ -1,5 +1,21 @@
-all:
-	g++ innerProduct.cpp -std=c++11
+CC = g++
+#FILES = *.cpp
+#OUT_EXE = a.out
+OPTS = -std=c++11
+#
+#build: $(FILES)
+#	$(CC) -o $(OUT_EXE) $(FILES) $(OPTS)
+#
+#clean:
+#	-rm -f *.o core $(OUT_EXE)
+#
+#rebuild: clean build
+
+nothing: nothing.cpp
+	$(CC) -o nothing nothing.cpp $(OPTS)
+
+main: innerProduct.cpp
+	$(CC) -o innerProduct innerProduct.cpp $(OPTS)
 
 clean:
-	rm -f a.out
+	-rm -f *.o core nothing innerProduct
