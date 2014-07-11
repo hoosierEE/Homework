@@ -4,10 +4,10 @@ import sys, time, os, subprocess
 matrixSize = sys.argv[1] # pass in an integer
 
 silent = " 2>&1 > /dev/null" # redirect standard output to trash
-jtest  = "./exe/jnothing"
-ctest  = "./exe/cnothing"
-jreal  = "./exe/jexe"
-creal  = "./exe/cexe"
+jtest  = "./exe/jnothing.ijs"
+jreal  = "./exe/jexe.ijs"
+ctest  = "./exe/cnothing.out"
+creal  = "./exe/cexe.out"
 
 def timer(filename):
     """ Measure the time it takes to invoke the given command

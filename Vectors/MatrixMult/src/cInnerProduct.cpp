@@ -5,6 +5,7 @@
 
 //template <typename T>
 //std::ostream& operator<< (std::ostream& os, const std::vector<T>& v)
+// seems to run slightly faster without the template, not sure though.
 std::ostream& operator<< (std::ostream& os, const std::vector<double>& v)
 { // pretty-print a vector using operator<<
   for (auto& i : v)
