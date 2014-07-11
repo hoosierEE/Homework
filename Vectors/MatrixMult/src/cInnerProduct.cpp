@@ -3,8 +3,9 @@
 #include <algorithm>
 #include <ctime>
 
-template <typename T>
-std::ostream& operator<< (std::ostream& os, const std::vector<T>& v)
+//template <typename T>
+//std::ostream& operator<< (std::ostream& os, const std::vector<T>& v)
+std::ostream& operator<< (std::ostream& os, const std::vector<double>& v)
 { // pretty-print a vector using operator<<
   for (auto& i : v)
     i == *v.begin() ? os << i : os << " " << i;
