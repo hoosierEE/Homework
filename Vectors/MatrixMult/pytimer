@@ -1,4 +1,10 @@
 #!/usr/bin/python
+""" This script takes an integer argument, which is then passed into 
+        the benchmarking scripts. Each script attempts to do the same thing:
+    1. generate a square random matrix comprised of two random vectors multiplied together
+    2. multiply the first random vector with the matrix (perform the dot product)
+    3. print the resulting vector to standard output (console)
+"""
 import sys, time, os, subprocess
 
 matrixSize = sys.argv[1] # pass in an integer

@@ -1,5 +1,4 @@
 # makefile for some c++ files in a directory
-
 CC = g++
 OPTS = -std=c++11
 OUT_DIR = exe/
@@ -8,7 +7,9 @@ CTEST = cnothing
 CMAIN = cInnerProduct.cpp
 COUTPUT = cexe
 
-all: clean nothing main
+all: nothing main
+
+rebuild: clean nothing main
 
 nothing: $(SRC_DIR)$(CTEST).cpp
 	$(CC) -o $(OUT_DIR)$(CTEST) $(SRC_DIR)$(CTEST).cpp $(OPTS)
@@ -18,4 +19,3 @@ main: $(SRC_DIR)$(CMAIN)
 
 clean:
 	-rm -f *.o core $(OUT_DIR)$(COUTPUT) $(OUT_DIR)$(CTEST)
-
