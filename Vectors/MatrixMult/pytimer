@@ -9,7 +9,6 @@ import sys, time, os, subprocess
 
 matrixSize = sys.argv[1] # pass in an integer to this script
 
-silent = " 2>&1 > /dev/null" # redirect standard output to trash
 jtest  = "./bin/jnothing.ijs"
 jreal  = "./bin/jexe.ijs"
 ctest  = "./bin/cnothing.out"
@@ -18,7 +17,7 @@ creal  = "./bin/cexe.out"
 def timer(filename):
     """ Measure the time it takes to invoke the given command
     using a shell subprocess. """
-    strCmd = filename + silent
+    strCmd = filename
     start = end = 0
     start = time.time()
     myProcess = subprocess.Popen(strCmd, shell=True)
@@ -48,16 +47,16 @@ def winner(a1, n1, a2, n2):
     return output
 
 # use these two to subtract the estimated time required just run the executable or script
-#see = av(creal, False) - av(ctest, True)
+#cplusplus = av(creal, False) - av(ctest, True)
 #jay = av(jreal, False) - av(jtest, True)
 
 # OR, use these instead to get the average time only
-#see = av(creal, False, 10)
+#cplusplus = av(creal, False, 10)
 #jay = av(jreal, False, 10)
 
 # OR, just the results of a single run, no averaging
-see = timer(creal + " " + matrixSize)
+cplusplus = timer(creal + " " + matrixSize)
 jay = timer(jreal + " " + matrixSize)
 
-print winner(see, "C++", jay, "J")
+print winner(cplusplus, "C++", jay, "J")
 

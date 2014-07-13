@@ -1,6 +1,6 @@
 # makefile for some c++ files in a directory
 CC = g++
-OPTS = -std=c++11
+OPTS = -std=c++11 -O3
 OUT_DIR = bin/
 SRC_DIR = src/
 CTEST = cnothing
