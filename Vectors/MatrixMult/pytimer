@@ -51,12 +51,13 @@ def winner(a1, n1, a2, n2):
 #see = av(creal, False) - av(ctest, True)
 #jay = av(jreal, False) - av(jtest, True)
 
-# use these instead to get the actual time only
-# see = av(creal, False, 10)
-# jay = av(jreal, False, 10)
+# OR, use these instead to get the average time only
+#see = av(creal, False, 10)
+#jay = av(jreal, False, 10)
 
-# or just the results of a single run, no averaging
+# OR, just the results of a single run, no averaging
 see = timer(creal + " " + matrixSize)
 jay = timer(jreal + " " + matrixSize)
+
 print winner(see, "C++", jay, "J")
 
