@@ -1,5 +1,5 @@
 #include <vector>
-#include <algorithm>
+//#include <algorithm>
 #include <ctime>
 #include <iostream>
 #include <fstream>
@@ -33,16 +33,16 @@ int main(int argc, char* argv[])
 
   for (auto i = 0; i < elems; i++) // generate random vector
     a.push_back(genRand());
-  std::cout << "a: " << a << std::endl;
+  //std::cout << "a: " << a << std::endl;
 
   for (auto i = 0; i < elems * elems; i++) // generate random matrix
     m.push_back(genRand());
-  std::cout << "m: " << m << std::endl;
+  //std::cout << "m: " << m << std::endl;
 
   for (auto i = 0; i < r.size(); i++) // perform dot product
     for (auto j = 0; j < r.size(); j++)
       r[i] += a[i] * m[i * j];
-  std::cout << "r: " << r << std::endl;
+  //std::cout << "r: " << r << std::endl;
 
   result << r << std::endl; // print results
   result.close();
