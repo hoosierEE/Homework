@@ -3,9 +3,8 @@
 #include <algorithm>
 #include <ctime>
 
-template <typename T>
-std::ostream& operator<< (std::ostream& os, const std::vector<T>& v)
-{ // pretty-print a vector using operator<<
+std::ostream& operator<< (std::ostream& os, const std::vector<double>& v)
+{ // pretty-print a vector of doubles using operator<<
   for (auto& i : v)
     i == *v.begin() ? os << i : os << " " << i;
   return os;
@@ -32,11 +31,18 @@ int main(int argc, char* argv[])
   std::vector<double> m(elems * elems); // actually this is a vector of length (N*N)
   std::vector<double> a;
   std::vector<double> b;
-  a = randVec(a, elems);
-  b = randVec(b, elems); // does it segfault here? nope.
   std::vector<double> r(elems, 0); // to store the result
 
-  // build random matrix
+  // put random values in a and b
+  a = randVec(a, elems);
+<<<<<<< HEAD
+  b = randVec(b, elems); // does it segfault here? nope.
+  std::vector<double> r(elems, 0); // to store the result
+=======
+  b = randVec(b, elems);
+>>>>>>> eeaceebd336add13cf18d34e8918d7cf4fad0b0e
+
+  // build random matrix from the two random vectors
   for (auto i = 0; i < m.size(); i++)
     for (auto j = 0; j < a.size(); j++)
       m[i] = a[j] * b[j]; // oh yeah, a and b are the same size. Segfault problem solved.
@@ -44,7 +50,7 @@ int main(int argc, char* argv[])
   //// do inner product
   for (auto i = 0; i < a.size(); i++)
     for (auto j = 0; j < b.size(); j++)
-      r[i] += a[i] * m[i + j];  // swap loop order
+      r[i] += a[i] * m[i + j];  // swap loop order?
 
   // print results
   std::cout << r << std::endl;
