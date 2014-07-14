@@ -2,7 +2,7 @@
 
 #### The Assignment
 Write a matrix multiplication algorithm in C++, benchmark it.
-Try to make it faster by paying attention to memory access patterns.
+Try to make it faster...
 
 #### The Twist
 Do the same thing in a different language and compare the results by:
@@ -30,28 +30,4 @@ prerequesites:
 running:
 
 1. In a terminal, navigate to the MatrixMult folder and run `make`.
-2. run `pytimer` to display the execution times (e.g. on UNIX based systems, type `./pytimer`)
-
-## Files
-```
-MatrixMult/
-├── exe
-│   ├── cexe
-│   ├── cnothing
-│   ├── jexe
-│   └── jnothing
-├── makefile
-├── old
-│   ├── argv.ijs
-│   ├── oldInnerProduct.cpp
-│   └── oldInnerProduct.ijs
-├── pytimer
-├── README.markdown
-└── src
-    ├── cInnerProduct.cpp
-    ├── cnothing.cpp
-    ├── jInnerProduct.ijs
-    └── jnothing.ijs
-
-3 directories, 14 files
-```
+2. run `pytimer N` to create files showing the execution times for 0..N sized multiplications.
