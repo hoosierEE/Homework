@@ -1,4 +1,8 @@
 # Polyglot Inner Product
+Results: J is fast.
+
+<img src="https://raw.githubusercontent.com/hoosierEE/Homework/master/Vectors/MatrixMult/output/graph.png"
+  style="width=100%;"/>
 
 #### The Assignment
 Write a matrix multiplication algorithm in C++, benchmark it.

@@ -1,7 +1,7 @@
-#include <iostream>
 #include <vector>
-#include <algorithm>
-#include <ctime>
+#include <fstream>
+
+const std::string outputName = "output/coutput.txt"; // the name of the file this program makes
 
 std::ostream& operator<< (std::ostream& os, const std::vector<double>& v)
 { // pretty-print a vector of doubles using operator<<
@@ -10,42 +10,37 @@ std::ostream& operator<< (std::ostream& os, const std::vector<double>& v)
   return os;
 }
 
-struct randomGenerator
-{ // until I did this, it would always output the same random sequence
-  randomGenerator() {};
-  double operator()() { return rand()/(double)RAND_MAX;  }
-};
-
-std::vector<double> randVec(std::vector<double> &x, int elems)
-{ // return a random vector
-  x.reserve(elems);
-  std::generate_n(std::back_inserter(x), elems, randomGenerator());
-  return x;
+double genRand(void)
+{
+  return rand() / static_cast<double>(RAND_MAX);
 }
 
 int main(int argc, char* argv[])
 {
-  srand(std::time(0));
-  int elems = std::atoi(argv[1]);
-  std::vector<double> m(elems * elems); // actually this is a vector of length (N*N)
-  std::vector<double> a;
-  std::vector<double> b;
-  std::vector<double> r(elems, 0); // to store the result
+  // file i/o
+  std::ofstream result;
+  result.open(outputName, std::ios::out);
 
-  // put random values in a and b
-  a = randVec(a, elems);
-  b = randVec(b, elems);
+  srand(1);
+  //srand(std::time(0)); // not sure if J version always generates a new seed so leaving this out for now.
+  long elems = std::atol(argv[1]); // command line param
+  std::vector<double> m(elems * elems); // (elems * elems); // actually this is a vector of length (N*N)
+  std::vector<double> a(elems);
+  std::vector<double> r(elems, 0); // r(elems, 0); // to store the result
 
-  // build random matrix from the two random vectors
-  for (auto i = 0; i < m.size(); i++)
-    for (auto j = 0; j < a.size(); j++)
-      m[i] = a[i] * b[j];
+  for (auto i = 0; i < elems; i++) // generate random vector
+    a[i] = genRand();
+    //a.push_back(genRand());
 
-  // do inner product
-  for (auto i = 0; i < a.size(); i++)
-    for (auto j = 0; j < b.size(); j++)
-      r[i] += a[i] * m[i + j];  // swap loop order?
+  for (auto i = 0; i < elems * elems; i++) // generate random matrix
+    m[i] = genRand();
+    //m.push_back(genRand());
 
-  // print results
-  std::cout << r << std::endl;
+  for (auto i = 0; i < m.size(); i++) { // about 12% faster than commented-out loop below.
+    auto idx = i / a.size();
+    r[idx] += a[idx] * m[i]; // well no wonder, it's always zero.
+  }
+
+  result << r << std::endl; // print results
+  result.close();
 }

@@ -47,7 +47,7 @@ std::vector<std::string> &split(const std::string &s, char delim, std::vector<st
     return elems;
 }
 
-// program
+// write output to file
 int main() {
   // open a stream for writing
   std::ofstream result;

@@ -18,7 +18,12 @@ m =. a*/b           NB. build a random table by multiplying each cell of a with 
 
 
 NB. the main program. compute inner product of a and m
-word =. a +/ . * m
+word =. ": a +/ . * m
 
-echo word           NB. display result
+writefile =: 1!:2
+fn =. < 'output/joutput.txt'
+word writefile fn
+
+NB. echo word           NB. display result
+
 exit''

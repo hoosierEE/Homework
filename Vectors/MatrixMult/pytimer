@@ -1,56 +1,37 @@
 #!/usr/bin/python
 import sys, time, os, subprocess
 
-matrixSize = sys.argv[1] # pass in an integer to this script
+dimension = sys.argv[1] # pass in an integer to this script
 
-silent = " 2>&1 > /dev/null" # redirect standard output to trash
-jtest  = "./exe/jnothing.ijs"
-jreal  = "./exe/jexe.ijs"
-ctest  = "./exe/cnothing.out"
-creal  = "./exe/cexe.out"
+jreal  = "./bin/jexe.ijs"
+creal  = "./bin/cexe.out"
 
-def timer(filename):
+def timer(cmd):
     """ Measure the time it takes to invoke the given command
     using a shell subprocess. """
-    strCmd = filename + silent
     start = end = 0
     start = time.time()
-    myProcess = subprocess.Popen(strCmd, shell=True)
+    myProcess = subprocess.Popen(cmd, shell=True)
     myProcess.wait()
     end = time.time()
     return end - start
 
-def av(filename, test, iters = 10):
+def av(filename, iters = 5):
     avg = 0
     for i in range(iters):
-        if (test):
-            avg += timer(filename)
-        else:
-            avg += timer(filename + " " + matrixSize)
+        avg += timer(filename)
     return avg / iters
 
-def winner(a1, n1, a2, n2):
-    output = "Results:\n"
-    output += n1 + ": " + str(a1) + "\n"
-    output += n2 + ": " + str(a2) + "\n"
-    if (a1 == a2):
-        output += "tie"
-    if (a1 < a2):
-        output += n1 + " was " + str(a2 / a1) + " times faster."
-    if (a1 > a2):
-        output += n2 + " was " + str(a1 / a2) + " times faster."
+def columnBuilder(cmd):
+    output = ""
+    for i in range(int(dimension)):
+        output += str(timer(cmd + " " + str(i))) + "\n"
     return output
 
-# use these two to subtract the estimated time required just run the executable or script
-#see = av(creal, False) - av(ctest, True)
-#jay = av(jreal, False) - av(jtest, True)
-
-# use these instead to get the actual time only
-# see = av(creal, False, 10)
-# jay = av(jreal, False, 10)
-
-# or just the results of a single run, no averaging
-see = timer(creal + " " + matrixSize)
-jay = timer(jreal + " " + matrixSize)
-print winner(see, "C++", jay, "J")
+f = open("output/coutput.csv",'w')
+f.write(columnBuilder(creal))
+f.close()
+f = open("output/joutput.csv",'w')
+f.write(columnBuilder(jreal))
+f.close()
 
