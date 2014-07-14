@@ -29,16 +29,16 @@ int main(int argc, char* argv[])
   std::vector<double> r(elems, 0); // r(elems, 0); // to store the result
 
   for (auto i = 0; i < elems; i++) // generate random vector
-    //a[i] = genRand();
-    a.push_back(genRand());
+    a[i] = genRand();
+    //a.push_back(genRand());
 
   for (auto i = 0; i < elems * elems; i++) // generate random matrix
-    //m[i] = genRand();
-    m.push_back(genRand());
+    m[i] = genRand();
+    //m.push_back(genRand());
 
   for (auto i = 0; i < m.size(); i++) { // about 12% faster than commented-out loop below.
-    static auto idx = i / a.size();
-    r[idx] += a[idx] * m[i];
+    auto idx = i / a.size();
+    r[idx] += a[idx] * m[i]; // well no wonder, it's always zero.
   }
 
   result << r << std::endl; // print results
