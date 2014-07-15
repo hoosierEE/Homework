@@ -21,18 +21,15 @@ For this particular shootout, the languages being compared are
     * tacit programming.
 
 ## Results
-J has some startup overhead involved, which was not subtracted from the results. C++ is therefore faster
+J has more startup overhead involved, which was not subtracted from the results. C++ is therefore faster
 for small inputs, but for larger inputs, J's speed becomes apparent.
 
-###### Results on Samsung ARM Chromebook (1st gen):
 <img src="https://raw.githubusercontent.com/hoosierEE/Homework/master/Vectors/MatrixMult/output/chart.png"
   style="width=100%;"/>
 
-###### C++ speedup after code review. Still slower than J for large matrices:
 <img src="https://raw.githubusercontent.com/hoosierEE/Homework/master/Vectors/MatrixMult/output/afterReview.png"
   style="width=100%;"/>
 
-###### Quad-Core Intel i7 Performance:
 <img src="https://raw.githubusercontent.com/hoosierEE/Homework/master/Vectors/MatrixMult/output/quadChart.png"
   style="width=100%;"/>
 
