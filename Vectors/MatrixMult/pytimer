@@ -3,6 +3,7 @@ import sys, time, os, subprocess
 
 dimension = sys.argv[1] # pass in an integer to this script
 
+outDir = "output/"
 jreal  = "./bin/jexe.ijs"
 creal  = "./bin/cexe.out"
 
@@ -16,22 +17,38 @@ def timer(cmd):
     end = time.time()
     return end - start
 
-def av(filename, iters = 5):
+def av(cmd, iters = 5):
     avg = 0
     for i in range(iters):
-        avg += timer(filename)
+        avg += timer(cmd)
     return avg / iters
 
 def columnBuilder(cmd):
     output = ""
-    for i in range(int(dimension)):
-        output += str(timer(cmd + " " + str(i))) + "\n"
+    i = 0
+    n = int(dimension)
+    while i <= n:
+        stri = str(i)
+        output += stri + ", " + str(av(cmd + " " + stri)) + "\n"
+        i += int(n / 10)
     return output
 
-f = open("output/coutput.csv",'w')
-f.write(columnBuilder(creal))
-f.close()
-f = open("output/joutput.csv",'w')
-f.write(columnBuilder(jreal))
-f.close()
+def winner(cmd1, cmd2):
+    t1 = timer(cmd1 + " " + dimension)
+    t2 = timer(cmd2 + " " + dimension)
+    if t1 == t2:
+        return "tie!"
+    else:
+        return cmd1 + "(" + str(t1) + ") was " + str(t2/t1) + " times faster than " + cmd2 + "(" + str(t2) + ")"
 
+def writer(scriptName, cmd):
+    f = open(outDir + scriptName + ".csv",'w')
+    f.write(scriptName + "\n")
+    f.write(columnBuilder(cmd))
+    f.close()
+
+writer("jOutput", jreal)
+writer("cppOutput", creal)
+
+print "Results of " + str(dimension) + "th run: "
+print winner(jreal, creal)

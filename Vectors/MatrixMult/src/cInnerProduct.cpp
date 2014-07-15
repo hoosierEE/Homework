@@ -1,44 +1,48 @@
 #include <vector>
 #include <fstream>
-
-const std::string outputName = "output/coutput.txt"; // the name of the file this program makes
+#include <random>
+#include <iostream>
 
 std::ostream& operator<< (std::ostream& os, const std::vector<double>& v)
-{ // pretty-print a vector of doubles using operator<<
+{
+  // pretty-print a vector of doubles using operator<<
   for (auto& i : v)
     i == *v.begin() ? os << i : os << " " << i;
   return os;
-}
-
-double genRand(void)
-{
-  return rand() / static_cast<double>(RAND_MAX);
 }
 
 int main(int argc, char* argv[])
 {
   // file i/o
   std::ofstream result;
-  result.open(outputName, std::ios::out);
+  result.open("output/coutput.txt", std::ios::out);
 
-  srand(1);
-  //srand(std::time(0)); // not sure if J version always generates a new seed so leaving this out for now.
+  // randoms
+  std::mt19937 mt(1729);
+  std::uniform_real_distribution<double> dist(0,1);
+  // for (int i = 0; i < 16; i++) // testing
+  //   std::cout << dist(mt) << " ";
+  // std::cout << std::endl;
+
   long elems = std::atol(argv[1]); // command line param
   std::vector<double> m(elems * elems); // (elems * elems); // actually this is a vector of length (N*N)
   std::vector<double> a(elems);
-  std::vector<double> r(elems, 0); // r(elems, 0); // to store the result
+  std::vector<double> r(elems, 0); // to store the result
 
   for (auto i = 0; i < elems; i++) // generate random vector
-    a[i] = genRand();
-    //a.push_back(genRand());
+  {
+    a[i] = dist(mt);
+  }
 
   for (auto i = 0; i < elems * elems; i++) // generate random matrix
-    m[i] = genRand();
-    //m.push_back(genRand());
+  {
+    m[i] = dist(mt);
+  }
 
-  for (auto i = 0; i < m.size(); i++) { // about 12% faster than commented-out loop below.
+  for (auto i = 0; i < m.size(); i++)
+  {
     auto idx = i / a.size();
-    r[idx] += a[idx] * m[i]; // well no wonder, it's always zero.
+    r[idx] += a[idx] * m[i];
   }
 
   result << r << std::endl; // print results
