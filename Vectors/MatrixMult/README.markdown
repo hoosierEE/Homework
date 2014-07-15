@@ -1,8 +1,9 @@
 # Polyglot Inner Product
-Results: J is fast.
+Results: J is fast by default.
 
-<img src="https://raw.githubusercontent.com/hoosierEE/Homework/master/Vectors/MatrixMult/output/graph.png"
+<img src="https://raw.githubusercontent.com/hoosierEE/Homework/master/Vectors/MatrixMult/output/chart.png"
   style="width=100%;"/>
+#### showing results on Samsung ARM Chromebook (1st gen)
 
 #### The Assignment
 Write a matrix multiplication algorithm in C++, benchmark it.

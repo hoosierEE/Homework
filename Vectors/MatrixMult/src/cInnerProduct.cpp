@@ -1,7 +1,8 @@
 #include <vector>
 #include <fstream>
 #include <random>
-#include <iostream>
+#include <algorithm>
+//#include <iostream>
 
 std::ostream& operator<< (std::ostream& os, const std::vector<double>& v)
 {
@@ -11,38 +12,39 @@ std::ostream& operator<< (std::ostream& os, const std::vector<double>& v)
   return os;
 }
 
+template<typename Cont = std::vector<double>>
+Cont genRand(std::size_t n)
+{
+  Cont results;
+  results.reserve(n);
+
+  std::mt19937 mt(1729);
+  std::uniform_real_distribution<> dist(0,1);
+  auto random = [&]() { return dist(mt); };
+  std::generate_n(std::back_inserter(results), n, random);
+  return results;
+}
+
 int main(int argc, char* argv[])
 {
   // file i/o
   std::ofstream result;
   result.open("output/coutput.txt", std::ios::out);
 
-  // randoms
-  std::mt19937 mt(1729);
-  std::uniform_real_distribution<double> dist(0,1);
-  // for (int i = 0; i < 16; i++) // testing
-  //   std::cout << dist(mt) << " ";
-  // std::cout << std::endl;
-
   long elems = std::atol(argv[1]); // command line param
-  std::vector<double> m(elems * elems); // (elems * elems); // actually this is a vector of length (N*N)
-  std::vector<double> a(elems);
-  std::vector<double> r(elems, 0); // to store the result
 
-  for (auto i = 0; i < elems; i++) // generate random vector
-  {
-    a[i] = dist(mt);
-  }
+  auto a = genRand(elems); // random vector
 
-  for (auto i = 0; i < elems * elems; i++) // generate random matrix
-  {
-    m[i] = dist(mt);
-  }
+  std::vector<std::vector<double>> m; // random matrix
+  for (auto i = 0; i < elems; i++)
+    m.emplace_back(genRand(elems));
 
-  for (auto i = 0; i < m.size(); i++)
-  {
-    auto idx = i / a.size();
-    r[idx] += a[idx] * m[i];
+  std::vector<double> r; // to store the result
+  r.reserve(elems);
+
+  for (auto it = m.begin(); it != m.end(); ++it) {
+    auto v = std::inner_product(std::begin(a), std::end(a), std::begin(*it), 0.0);
+    r.push_back(v);
   }
 
   result << r << std::endl; // print results
