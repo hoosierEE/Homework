@@ -5,7 +5,9 @@ dimension = sys.argv[1] # pass in an integer to this script
 
 outDir = "output/"
 jreal  = "./bin/jexe.ijs"
+jnada  = "./bin/jnothing.ijs"
 creal  = "./bin/cexe.out"
+cnada  = "./bin/cnothing.out"
 
 def timer(cmd):
     """ Measure the time it takes to invoke the given command
@@ -49,6 +51,10 @@ def writer(scriptName, cmd):
 
 writer("jOutput", jreal)
 writer("cppOutput", creal)
+
+print "Overhead from calling the program: "
+print "J: " + str(timer(jnada))
+print "C++: " + str(timer(cnada))
 
 print "Results of " + str(dimension) + "th run: "
 print winner(jreal, creal)
