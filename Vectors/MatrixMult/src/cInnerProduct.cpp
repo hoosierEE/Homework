@@ -1,6 +1,6 @@
 #include <vector>
 #include <fstream>
-//#include <random>
+#include <random>
 #include <algorithm>
 
 std::ostream& operator<< (std::ostream& os, const std::vector<double>& v)

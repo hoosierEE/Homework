@@ -43,22 +43,19 @@ def winner(cmd1, cmd2):
     else:
         return cmd1 + "(" + str(t1) + ") was " + str(t2/t1) + " times faster than " + cmd2 + "(" + str(t2) + ")"
 
-def writer(scriptName, cmd):
-    f = open(outDir + scriptName + ".csv",'w')
-    f.write(scriptName + "\n")
-    f.write(columnBuilder(cmd))
+def rowBuilder(i):
+    n = str(i)
+    row = n + ", " + str(timer(jreal + " " + n))+ ", " + str(timer(creal + " " + n)) + "\n"
+    return row
+
+def results():
+    f = open(outDir + "results.csv", 'w')
+    f.write("N, J, C++\n")
+    for i in range(int(dimension) / 10):
+        f.write(rowBuilder(i * 10))
     f.close()
 
-def overhead():
-    oh = "Overhead from calling the program: \n"
-    oh += "J: "   + str(timer(jnada)) + "\n"
-    oh += "C++: " + str(timer(cnada)) + "\n"
-    return oh
-
-print (overhead())
-
-writer("jOutput", jreal)
-writer("cppOutput", creal)
+results()
 
 print("Results of " + str(dimension) + "th run: ")
 print(winner(jreal, creal))

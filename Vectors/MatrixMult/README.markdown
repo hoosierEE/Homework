@@ -31,6 +31,11 @@ for small inputs, but for larger inputs, J's speed becomes apparent.
 ###### C++ speedup after code review. Still slower than J for large matrices:
 <img src="https://raw.githubusercontent.com/hoosierEE/Homework/master/Vectors/MatrixMult/output/afterReview.png"
   style="width=100%;"/>
+
+###### Quad-Core Intel i7 Performance:
+<img src="https://raw.githubusercontent.com/hoosierEE/Homework/master/Vectors/MatrixMult/output/quadChart.png"
+  style="width=100%;"/>
+
 ## Try it
 prerequesites:
 
