@@ -1,0 +1,8 @@
+#!/usr/bin/python
+# My first Python program! :)
+import os
+f = open('csvNames', 'w')
+lst = (os.listdir("raw"))
+for i in lst:
+    f.write("raw/" + i + "\n")
+f.close()

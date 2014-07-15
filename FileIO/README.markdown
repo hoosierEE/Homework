@@ -12,13 +12,9 @@
 3. This repository (to use the symlink to the makefile)
 
 ## Usage
-Run the following commands:
+Run the following commands (for UNIX-like systems):
 ```
-python filenameList.py
+./pyNameList
 make
+./a.out
 ```
-
-Then run `output_executable`. 
-
-For example from a Linux terminal you would issue the command:
-`./output_executable`
