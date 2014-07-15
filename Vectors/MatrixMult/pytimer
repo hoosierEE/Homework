@@ -49,12 +49,16 @@ def writer(scriptName, cmd):
     f.write(columnBuilder(cmd))
     f.close()
 
+def overhead():
+    oh = "Overhead from calling the program: \n"
+    oh += "J: "   + str(timer(jnada)) + "\n"
+    oh += "C++: " + str(timer(cnada)) + "\n"
+    return oh
+
+print (overhead())
+
 writer("jOutput", jreal)
 writer("cppOutput", creal)
 
-print "Overhead from calling the program: "
-print "J: " + str(timer(jnada))
-print "C++: " + str(timer(cnada))
-
-print "Results of " + str(dimension) + "th run: "
-print winner(jreal, creal)
+print("Results of " + str(dimension) + "th run: ")
+print(winner(jreal, creal))

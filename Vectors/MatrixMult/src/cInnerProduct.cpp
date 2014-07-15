@@ -1,7 +1,6 @@
-#include <fstream>
 #include <vector>
 #include <fstream>
-#include <random>
+//#include <random>
 #include <algorithm>
 
 std::ostream& operator<< (std::ostream& os, const std::vector<double>& v)
@@ -40,5 +39,5 @@ int main(int argc, char* argv[])
     r.push_back(v);
   }
   result << r << std::endl; // print results
-  // result.close();
+  // result.close(); // should close itself right?
 }
