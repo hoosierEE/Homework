@@ -7,7 +7,7 @@
 std::ostream& operator<< (std::ostream& os, const std::vector<double>& v)
 {
     int version = 0;
-    switch version {
+    switch (version) {
         case 0: // hackish but perhaps the best
             for (auto& i : v)
                 os << i << " ";
